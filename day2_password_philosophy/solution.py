@@ -31,13 +31,28 @@ def parse_line(line: str):
 def check_validness_pw(password: str, pw_rules: PasswordRules) -> int:
     count = password.count(pw_rules.letter)
     if pw_rules.min_occurence <= count <= pw_rules.max_occurence:
-        return 1
-    return 0
-
+        return True
+    return False
 
 valid_count = 0
 for line in lines:
     pw, rule = parse_line(line)
-    valid_count += check_validness_pw(pw, rule)
+    if check_validness_pw(pw, rule):
+        valid_count += 1
+print(valid_count)
+
+#part two
+def check_validness_pw2(password: str, pw_rules: PasswordRules) -> int:
+    password = password.strip()
+    # xor if either contains the letter
+    if (password[(pw_rules.min_occurence - 1)] == pw_rules.letter) ^ (password[(pw_rules.max_occurence - 1)] == pw_rules.letter):
+        return True
+    return False
+
+valid_count = 0
+for line in lines:
+    pw, rule = parse_line(line)
+    if check_validness_pw2(pw, rule):
+        valid_count += 1
 
 print(valid_count)
