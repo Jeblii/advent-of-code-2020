@@ -1,5 +1,6 @@
 from itertools import combinations
-with open ('day1_report_repair/input.txt') as f:
+
+with open("day1_report_repair/input.txt") as f:
     lines = f.read().splitlines()
 
 lines = [int(line) for line in lines]
