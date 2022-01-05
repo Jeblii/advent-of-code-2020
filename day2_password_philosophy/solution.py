@@ -6,6 +6,7 @@ with open("day2_password_philosophy/input.txt") as f:
 
 # part one
 
+
 @dc.dataclass
 class PasswordRules:
     letter: str
@@ -34,6 +35,7 @@ def check_validness_pw(password: str, pw_rules: PasswordRules) -> int:
         return True
     return False
 
+
 valid_count = 0
 for line in lines:
     pw, rule = parse_line(line)
@@ -41,13 +43,17 @@ for line in lines:
         valid_count += 1
 print(valid_count)
 
-#part two
+# part two
 def check_validness_pw2(password: str, pw_rules: PasswordRules) -> int:
+    # remove all leading and ending whitespaces
     password = password.strip()
     # xor if either contains the letter
-    if (password[(pw_rules.min_occurence - 1)] == pw_rules.letter) ^ (password[(pw_rules.max_occurence - 1)] == pw_rules.letter):
+    if (password[(pw_rules.min_occurence - 1)] == pw_rules.letter) ^ (
+        password[(pw_rules.max_occurence - 1)] == pw_rules.letter
+    ):
         return True
     return False
+
 
 valid_count = 0
 for line in lines:
