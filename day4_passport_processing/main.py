@@ -4,7 +4,6 @@ import dataclasses as dc
 required_keys = ['byr', 'iyr', 'eyr', 'hgt', 'hcl', 'ecl', 'pid']
 
 def is_valid(keys: List[str]) -> bool:
-    # cid is not required
     intersection_keys = set(keys).intersection(set(required_keys))
     if intersection_keys == set(required_keys):
         return True
@@ -18,11 +17,13 @@ def parse_keys(lines:List[List[str]]) -> List[str]:
         keys.append(k)
     return keys
 
-with open("day4_passport_processing/example_input.txt") as f:
+with open("day4_passport_processing/input.txt") as f:
     lines = f.read()
 
 passport_data = lines.split('\n\n')
-for passport in passport_data:
-    print(is_valid(parse_keys(passport)))
+
+res = [is_valid(parse_keys(passport)) for passport in passport_data]
+print(sum(res))
+
 
 
